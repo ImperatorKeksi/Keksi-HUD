@@ -67,21 +67,7 @@ Das Ziel: Ein modernes, animiertes HUD mit klarer Struktur, adaptivem Farbschema
 1. Lade die Dateien herunter und entpacke sie in:  
    `garrysmod/addons/`
 
-2. Stelle sicher, dass die Ordnerstruktur korrekt ist:
-
-```
-
-garrysmod/addons/scifi_hud/
-└── lua/
-├── autorun/
-│   └── scifi_hud_loader.lua
-└── scifi_hud/
-├── cl_scifi_hud.lua
-└── scifi_hud_config.lua
-
-````
-
-3. **Garry’s Mod starten** – Das HUD lädt automatisch beim Spielstart!  
+2. **Garry’s Mod starten** – Das HUD lädt automatisch beim Spielstart!  
 
 ---
 
