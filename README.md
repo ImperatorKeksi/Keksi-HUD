@@ -194,14 +194,3 @@ Feedback, Ideen oder Bugs?
 
 **Made with 💙 by Imperator Keksi**
 *"Die Zukunft des Gameplay – Heute schon erleben!"* 🚀
-
-```
-
----
-
-✅ **Anleitung:**
-- Speichere diesen Code als **`README.md`** im Root-Ordner deines Addons oder GitHub-Repos.  
-- GitHub rendert automatisch alle Icons, Tabellen, Codeblöcke und Formatierungen sauber.  
-
-Möchtest du, dass ich dir dazu auch gleich eine **passende LICENSE.md** erstelle, die exakt zu dieser “nicht-kommerziellen Gemeinschaftslizenz” passt (rechtlich saubere Formulierung)?
-```
