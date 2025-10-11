@@ -4,7 +4,7 @@
 ![Garry's Mod](https://img.shields.io/badge/Garry's%20Mod-13%2B-blue)
 ![Version](https://img.shields.io/badge/Build-Beta-green)
 
-Ein futuristisches **Heads-Up-Display (HUD)** für Garry’s Mod mit markantem **Bacta-Cyan-Farbschema**, dynamischen Animationen und professionellem Sci-Fi-Design.
+Ein futuristisches **Heads-Up-Display (HUD)** für Garry’s Mod mit dynamischen Animationen und professionellem Sci-Fi-Design.
 
 ---
 
