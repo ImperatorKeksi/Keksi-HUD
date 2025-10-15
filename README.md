@@ -1,576 +1,160 @@
-# 🛡️ Keksi-HUD# 🛡️ Keksi-HUD
+﻿# 🛡️ Keksi-HUD
 
+![Status](https://img.shields.io/badge/Status-Beta-yellow?style=flat-square)
+![Garry's Mod](https://img.shields.io/badge/Garry's%20Mod-13%2B-blue?style=flat-square)
+![Lua](https://img.shields.io/badge/Lua-5.1%2B-blue?style=flat-square)
+![License](https://img.shields.io/badge/License-Non--Commercial-red?style=flat-square)
 
-
-![Status](https://img.shields.io/badge/Status-Beta-yellow?style=flat-square)![Status](https://img.shields.io/badge/Status-Beta-yellow?style=flat-square)
-
-![Garry's Mod](https://img.shields.io/badge/Garry's%20Mod-13%2B-blue?style=flat-square)![Garry's Mod](https://img.shields.io/badge/Garry's%20Mod-13%2B-blue?style=flat-square)
-
-![Lua](https://img.shields.io/badge/Lua-5.1%2B-blue?style=flat-square)![Lua](https://img.shields.io/badge/Lua-5.1%2B-blue?style=flat-square)
-
-![License](https://img.shields.io/badge/License-Non--Commercial-red?style=flat-square)![License](https://img.shields.io/badge/License-Non--Commercial-red?style=flat-square)
-
-
-
-Ein **futuristisches Heads-Up-Display (HUD)** für Garry's Mod mit professionellem Sci-Fi-Design, dynamischen Animationen und einem konfigurierbaren Lila-Blau Farbschema.Ein **futuristisches Heads-Up-Display (HUD)** für Garry's Mod mit professionellem Sci-Fi-Design, dynamischen Animationen und einem konfigurierbaren Lila-Blau Farbschema.
-
-
-
-------
-
-
-
-## 📖 Was ist Keksi-HUD?## 📖 Was ist Keksi-HUD?
-
-
-
-**Keksi-HUD** ist ein vollständig anpassbares, modernes HUD-System für Garry's Mod Server. Es ersetzt die Standard-Spieler-Oberfläche durch eine immersive, taktische Sci-Fi-Benutzeroberfläche mit:**Keksi-HUD** ist ein vollständig anpassbares, modernes HUD-System für Garry's Mod Server. Es ersetzt die Standard-Spieler-Oberfläche durch eine immersive, taktische Sci-Fi-Benutzeroberfläche mit:
-
-
-
-- **Professionellem Design**: Abgewinkelte Panels, Scanner-Effekte und Glow-Animationen- **Professionellem Design**: Abgewinkelte Panels, Scanner-Effekte und Glow-Animationen
-
-- **Vollständige Konfigurierbarkeit**: Alle Farben, Positionen und Animationen über Konfigurationsdateien anpassbar- **Vollständige Konfigurierbarkeit**: Alle Farben, Positionen und Animationen über Konfigurationsdateien anpassbar
-
-- **Performance-Optimiert**: Effiziente Lua-Implementierung für flüssige Darstellung- **Performance-Optimiert**: Effiziente Lua-Implementierung für flüssige Darstellung
-
-- **Roleplay-Fokus**: Perfekt für Sci-Fi, Military und Tactical RP Server- **Roleplay-Fokus**: Perfekt für Sci-Fi, Military und Tactical RP Server
-
-
-
-## 🎯 Hauptfeatures## 🎯 Hauptfeatures
-
-
-
-### 🎨 **Visuelles Design**### 🎨 **Visuelles Design**
-
-- **Lila-Blau Farbschema**: Futuristisches Color-Grading mit drei Varianten (Default, Assault, Support)- **Lila-Blau Farbschema**: Futuristisches Color-Grading mit drei Varianten (Default, Assault, Support)
-
-- **Animierte Scanner-Balken**: Segmentierte Statusanzeigen mit Pulse-Effekten- **Animierte Scanner-Balken**: Segmentierte Statusanzeigen mit Pulse-Effekten
-
-- **Box-Scan-Effekte**: Periodische Scan-Linien über alle UI-Elemente- **Box-Scan-Effekte**: Periodische Scan-Linien über alle UI-Elemente
-
-- **Abgewinkelte Panels**: Geometrische, taktische Optik mit Eckrahmen- **Abgewinkelte Panels**: Geometrische, taktische Optik mit Eckrahmen
-
-- **Glow-Effekte**: Mehrschichtige Leuchteffekte für bessere Sichtbarkeit- **Glow-Effekte**: Mehrschichtige Leuchteffekte für bessere Sichtbarkeit
-
-
-
-### 📊 **HUD-Komponenten**### 📊 **HUD-Komponenten**
-
-- **Vitalzeichen-Panel**: Health, Armor und Stamina mit Scanner-Balken- **Vitalzeichen-Panel**: Health, Armor und Stamina mit Scanner-Balken
-
-- **Munitions-Display**: Waffen-spezifische Anzeige mit Warnsystem bei niedrigem Ammo- **Munitions-Display**: Waffen-spezifische Anzeige mit Warnsystem bei niedrigem Ammo
-
-- **Radar-System**: 360° Radar mit Spieler/NPC-Erkennung und Team-Farbcodierung- **Radar-System**: 360° Radar mit Spieler/NPC-Erkennung und Team-Farbcodierung
-
-- **Kompass**: Richtungsanzeige mit Grad-Anzeige und Orientierungsmarkierungen- **Kompass**: Richtungsanzeige mit Grad-Anzeige und Orientierungsmarkierungen
-
-- **XP-Progression**: Level-System mit animierten Fortschrittsbalken- **XP-Progression**: Level-System mit animierten Fortschrittsbalken
-
-- **Missionsziele**: Konfigurierbares Objektiv-Tracking-System- **Missionsziele**: Konfigurierbares Objektiv-Tracking-System
-
-- **Funkkanal-Status**: TX/RX Anzeige für Voice-Chat Integration- **Funkkanal-Status**: TX/RX Anzeige für Voice-Chat Integration
-
-
-
-### 🎮 **Modi & Features**### 🎮 **Modi & Features**
-
-- **Nachtmodus**: Gedämpfte Farbpalette für bessere Sicht bei Dunkelheit- **Nachtmodus**: Gedämpfte Farbpalette für bessere Sicht bei Dunkelheit
-
-- **Minimal-Modus**: Reduzierte UI für kompetitives Gaming- **Minimal-Modus**: Reduzierte UI für kompetitives Gaming
-
-- **Combat-Modus**: Fokus auf kampfbezogene Elemente (versteckt XP/Missionen)- **Combat-Modus**: Fokus auf kampfbezogene Elemente (versteckt XP/Missionen)
-
-- **Farbenblind-Filter**: Unterstützung für Farbenblinde Spieler- **Farbenblind-Filter**: Unterstützung für Farbenblinde Spieler
-
-- **Konsolen-Befehle**: Live-Umschaltung aller Modi im Spiel- **Konsolen-Befehle**: Live-Umschaltung aller Modi im Spiel
-
-
-
-## 📂 Dateistruktur## 📂 Dateistruktur
-
-
-
-``````
-
-Keksi-HUD/Keksi-HUD/
-
-├── lua/├── lua/
-
-│   ├── autorun/│   ├── autorun/
-
-│   │   └── scifi_hud_loader.lua          # Automatischer Addon-Loader│   │   └── scifi_hud_loader.lua          # Automatischer Addon-Loader
-
-│   └── scifi_hud/│   └── scifi_hud/
-
-│       ├── scifi_hud_config.lua         # Zentrale Konfigurationsdatei│       ├── scifi_hud_config.lua         # Zentrale Konfigurationsdatei
-
-│       └── cl_scifi_hud.lua             # Haupt-HUD Client-Code│       └── cl_scifi_hud.lua             # Haupt-HUD Client-Code
-
-└── README.md                            # Diese Datei└── README.md                            # Diese Datei
-
-``````
-
-
-
-### 📋 Dateien-Beschreibung### 📋 Dateien-Beschreibung
-
-
-
-| Datei | Zweck | Beschreibung || Datei | Zweck | Beschreibung |
-
-|-------|-------|--------------||-------|-------|--------------|
-
-| `scifi_hud_loader.lua` | **Addon-Loader** | Lädt automatisch alle HUD-Komponenten beim Spielstart || `scifi_hud_loader.lua` | **Addon-Loader** | Lädt automatisch alle HUD-Komponenten beim Spielstart |
-
-| `scifi_hud_config.lua` | **Konfiguration** | Zentrale Einstellungen für Farben, Positionen, Animationen und Modi || `scifi_hud_config.lua` | **Konfiguration** | Zentrale Einstellungen für Farben, Positionen, Animationen und Modi |
-
-| `cl_scifi_hud.lua` | **HUD-Engine** | Haupt-Client-Script mit allen Zeichnungs- und Animationsfunktionen || `cl_scifi_hud.lua` | **HUD-Engine** | Haupt-Client-Script mit allen Zeichnungs- und Animationsfunktionen |
-
-
-
-## 🚀 Installation## 🚀 Installation
-
-
-
-1. **Download**: Lade das Repository als ZIP herunter oder clone es1. **Download**: Lade das Repository als ZIP herunter oder clone es
-
-2. **Entpacken**: Entpacke den `Keksi-HUD` Ordner nach:2. **Entpacken**: Entpacke den `Keksi-HUD` Ordner nach:
-
-   ```   ```
-
-   garrysmod/addons/keksi-hud/   garrysmod/addons/keksi-hud/
-
-   ```   ```
-
-3. **Server-Neustart**: Starte deinen Garry's Mod Server neu3. **Server-Neustart**: Starte deinen Garry's Mod Server neu
-
-4. **Client-Verbindung**: Spieler laden das HUD automatisch beim Verbinden4. **Client-Verbindung**: Spieler laden das HUD automatisch beim Verbinden
-
-
-
-## ⚙️ Konfiguration## ⚙️ Konfiguration
-
-
-
-Alle Einstellungen sind in `lua/scifi_hud/scifi_hud_config.lua` zentral gespeichert:Alle Einstellungen sind in `lua/scifi_hud/scifi_hud_config.lua` zentral gespeichert:
-
-
-
-### Farbschemata anpassen### Farbschemata anpassen
-
-```lua```lua
-
-SCIFI_HUD_CONFIG.ColorSchemes = {SCIFI_HUD_CONFIG.ColorSchemes = {
-
-    default = {    default = {
-
-        primary = Color(120, 80, 255, 255),    -- Haupt-Lila-Blau        primary = Color(120, 80, 255, 255),    -- Haupt-Lila-Blau
-
-        secondary = Color(80, 60, 180, 255),   -- Sekundärfarbe        secondary = Color(80, 60, 180, 255),   -- Sekundärfarbe
-
-        success = Color(100, 200, 255, 255),   -- Erfolg/Heilung        success = Color(100, 200, 255, 255),   -- Erfolg/Heilung
-
-        warning = Color(255, 102, 102, 255),   -- Warnungen        warning = Color(255, 102, 102, 255),   -- Warnungen
-
-        -- ... weitere Farben        -- ... weitere Farben
-
-    }    }
-
-}}
-
-``````
-
-
-
-### Positionen & Größen### Positionen & Größen
-
-```lua```lua
-
-SCIFI_HUD_CONFIG.Positions = {SCIFI_HUD_CONFIG.Positions = {
-
-    vitalBox = {    vitalBox = {
-
-        x = 40, y = -240,          -- Position vom Bildschirmrand        x = 40, y = -240,          -- Position vom Bildschirmrand
-
-        width = 360, height = 140,  -- Größe der Box        width = 360, height = 140,  -- Größe der Box
-
-        cornerSize = 15, padding = 15        cornerSize = 15, padding = 15
-
-    },    },
-
-    -- ... weitere UI-Elemente    -- ... weitere UI-Elemente
-
-}}
-
-``````
-
-
-
-### Animationsgeschwindigkeiten### Animationsgeschwindigkeiten
-
-```lua```lua
-
-SCIFI_HUD_CONFIG.Animations = {SCIFI_HUD_CONFIG.Animations = {
-
-    smoothSpeed = {    smoothSpeed = {
-
-        health = 6,    -- HP-Balken Animationsgeschwindigkeit        health = 6,    -- HP-Balken Animationsgeschwindigkeit
-
-        armor = 6,     -- Rüstungs-Balken Geschwindigkeit        armor = 6,     -- Rüstungs-Balken Geschwindigkeit
-
-        ammo = 8,      -- Munitions-Animation        ammo = 8,      -- Munitions-Animation
-
-        stamina = 4    -- Ausdauer-Animation        stamina = 4    -- Ausdauer-Animation
-
-    }    }
-
-}}
-
-``````
-
-
-
-## 🎮 Verwendung & Konsolenbefehle## 🎮 Verwendung & Konsolenbefehle
-
-
-
-### In-Game Steuerung### In-Game Steuerung
-
-```bash```bash
-
-scifi_hud_toggle night     # Nachtmodus an/ausscifi_hud_toggle night     # Nachtmodus an/aus
-
-scifi_hud_toggle minimal   # Minimal-Modus an/aus  scifi_hud_toggle minimal   # Minimal-Modus an/aus  
-
-scifi_hud_toggle combat    # Combat-Modus an/ausscifi_hud_toggle combat    # Combat-Modus an/aus
-
-``````
-
-
-
-### HUD-Layout### HUD-Layout
-
-| Position | Element | Beschreibung || Position | Element | Beschreibung |
-
-|----------|---------|--------------||----------|---------|--------------|
-
-| **Links unten** | Vitalzeichen | Health, Armor, Stamina mit Scanner-Balken || **Links unten** | Vitalzeichen | Health, Armor, Stamina mit Scanner-Balken |
-
-| **Rechts unten** | Munition | Waffen-Info mit Warnsystem und Reserve-Anzeige || **Rechts unten** | Munition | Waffen-Info mit Warnsystem und Reserve-Anzeige |
-
-| **Oben Mitte** | Kompass | 360° Navigation mit Grad-Anzeige || **Oben Mitte** | Kompass | 360° Navigation mit Grad-Anzeige |
-
-| **Oben links** | XP & Missionen | Level-Fortschritt und Objektiv-Tracking || **Oben links** | XP & Missionen | Level-Fortschritt und Objektiv-Tracking |
-
-| **Oben rechts** | Funkkanal | TX/RX Status für Voice-Chat || **Oben rechts** | Funkkanal | TX/RX Status für Voice-Chat |
-
-| **Rechts Mitte** | Radar | 360° Spieler/NPC-Erkennung mit Team-Farben || **Rechts Mitte** | Radar | 360° Spieler/NPC-Erkennung mit Team-Farben |
-
-
-
-## 🔧 Entwicklung & Anpassung## 🔧 Entwicklung & Anpassung
-
-
-
-Das HUD ist vollständig modular aufgebaut. Für eigene Anpassungen:Das HUD ist vollständig modular aufgebaut. Für eigene Anpassungen:
-
-
-
-1. **Farben ändern**: Bearbeite `SCIFI_HUD_CONFIG.ColorSchemes`1. **Farben ändern**: Bearbeite `SCIFI_HUD_CONFIG.ColorSchemes`
-
-2. **Positionen anpassen**: Modifiziere `SCIFI_HUD_CONFIG.Positions`2. **Positionen anpassen**: Modifiziere `SCIFI_HUD_CONFIG.Positions`
-
-3. **Neue Modi hinzufügen**: Erweitere die ConVar-Logik in `cl_scifi_hud.lua`3. **Neue Modi hinzufügen**: Erweitere die ConVar-Logik in `cl_scifi_hud.lua`
-
-4. **Animation-Timing**: Passe `SCIFI_HUD_CONFIG.Animations` an4. **Animation-Timing**: Passe `SCIFI_HUD_CONFIG.Animations` an
-
-
-
-### Kompatibilität### Kompatibilität
-
-- **Garry's Mod**: Version 13+- **Garry's Mod**: Version 13+
-
-- **DarkRP**: Vollständig kompatibel- **DarkRP**: Vollständig kompatibel
-
-- **Custom Gamemodes**: Funktioniert mit allen Standard-GMod APIs- **Custom Gamemodes**: Funktioniert mit allen Standard-GMod APIs
-
-- **Andere HUDs**: Deaktiviert automatisch Standard-HUD-Elemente- **Andere HUDs**: Deaktiviert automatisch Standard-HUD-Elemente
-
-
-
-## 🤝 Lizenz & Nutzungsrechte## 🤝 Lizenz & Nutzungsrechte
-
-
-
-### ✅ **Erlaubt:**### ✅ **Erlaubt:**
-
-- Kostenlose Nutzung auf privaten und öffentlichen Servern- Kostenlose Nutzung auf privaten und öffentlichen Servern
-
-- Modifikation und Anpassung für eigene Zwecke- Modifikation und Anpassung für eigene Zwecke
-
-- Weiterentwicklung und Verbesserung des Codes- Weiterentwicklung und Verbesserung des Codes
-
-- Verwendung als Basis für eigene HUD-Projekte- Verwendung als Basis für eigene HUD-Projekte
-
-
-
-### ❌ **Nicht erlaubt:**### ❌ **Nicht erlaubt:**
-
-- **Kommerzieller Verkauf** oder kostenpflichtige Lizenzierung- **Kommerzieller Verkauf** oder kostenpflichtige Lizenzierung
-
-- **Urheberschaftsansprüche** ohne Nennung des ursprünglichen Autors- **Urheberschaftsansprüche** ohne Nennung des ursprünglichen Autors
-
-- **Weiterverkauf** von modifizierten Versionen- **Weiterverkauf** von modifizierten Versionen
-
-
-
-### 📜 **Rechtlicher Hinweis**### 📜 **Rechtlicher Hinweis**
-
-Dieses Projekt steht unter einer **nicht-kommerziellen Gemeinschaftslizenz**. Der Code und das Design sind geistiges Eigentum von **Imperator Keksi**. Bei Verwendung in öffentlichen Projekten wird eine Quellennennung geschätzt, ist aber nicht zwingend erforderlich.Dieses Projekt steht unter einer **nicht-kommerziellen Gemeinschaftslizenz**. Der Code und das Design sind geistiges Eigentum von **Imperator Keksi**. Bei Verwendung in öffentlichen Projekten wird eine Quellennennung geschätzt, ist aber nicht zwingend erforderlich.
-
-
-
-## 👨‍💻 Entwickler## 👨‍💻 Entwickler
-
-
-
-**Imperator Keksi**  **Imperator Keksi**  
-
-Vollzeit-Entwickler für Garry's Mod Addons mit Fokus auf immersive User InterfacesVollzeit-Entwickler für Garry's Mod Addons mit Fokus auf immersive User Interfaces
-
-
-
-### 🌐 **Social Media & Kontakt**### 🌐 **Social Media & Kontakt**
-
-[![Website](https://img.shields.io/badge/🌐_Website-guns.lol%2Fimperatorkeksi-red?style=flat-square)](https://guns.lol/imperatorkeksi)[![Website](https://img.shields.io/badge/🌐_Website-guns.lol%2Fimperatorkeksi-red?style=flat-square)](https://guns.lol/imperatorkeksi)
-
-
-
-### 🎯 **Spezialisierungen**### 🎯 **Spezialisierungen**
-
-- **HUD/UI Design**: Futuristische und taktische Benutzeroberflächen- **HUD/UI Design**: Futuristische und taktische Benutzeroberflächen
-
-- **Lua-Programmierung**: Performance-optimierte Garry's Mod Skripte- **Lua-Programmierung**: Performance-optimierte Garry's Mod Skripte
-
-- **Game-Design**: Immersive Spielerlebnisse für RP-Server- **Game-Design**: Immersive Spielerlebnisse für RP-Server
-
-
-
-## 💬 Support & Community## 💬 Support & Community
-
-
-
-### 🐛 **Bug Reports & Feature Requests**### 🐛 **Bug Reports & Feature Requests**
-
-Erstelle ein **Issue** auf GitHub mit:Erstelle ein **Issue** auf GitHub mit:
-
-- Detaillierter Beschreibung des Problems- Detaillierter Beschreibung des Problems
-
-- Schritte zur Reproduktion- Schritte zur Reproduktion
-
-- Screenshots (falls visueller Bug)- Screenshots (falls visueller Bug)
-
-- Console-Output (falls Lua-Fehler)- Console-Output (falls Lua-Fehler)
-
-
-
-### 💡 **Feature-Wünsche**### 💡 **Feature-Wünsche**
-
-Ich bin immer offen für neue Ideen! Beschreibe deine Vorschläge so detailliert wie möglich.Ich bin immer offen für neue Ideen! Beschreibe deine Vorschläge so detailliert wie möglich.
-
-
-
-### 🚀 **Updates & News**### 🚀 **Updates & News**
-
-Folge mir auf [guns.lol/imperatorkeksi](https://guns.lol/imperatorkeksi) für:Folge mir auf [guns.lol/imperatorkeksi](https://guns.lol/imperatorkeksi) für:
-
-- Neue Feature-Ankündigungen- Neue Feature-Ankündigungen
-
-- Beta-Versionen- Beta-Versionen
-
-- Andere Garry's Mod Projekte- Andere Garry's Mod Projekte
-
-
-
-------
-
-
-
-**Made with 💜 by Imperator Keksi**  **Made with 💜 by Imperator Keksi**  
-
-*"Bringing the future of gaming interfaces to Garry's Mod - today!"**"Bringing the future of gaming interfaces to Garry's Mod - today!"*
+Ein **futuristisches Heads-Up-Display (HUD)** für Garry's Mod mit professionellem Sci-Fi-Design, dynamischen Animationen und einem konfigurierbaren Lila-Blau Farbschema.
 
 ---
 
-## 📖 Über das Projekt
+## 📖 Was ist Keksi-HUD?
 
-**Keksi HUD** bringt ein futuristisches, immersives Interface für Garry’s Mod.  
-Das Ziel: Ein modernes, animiertes HUD mit klarer Struktur, adaptivem Farbschema und taktischem Fokus für RP- und Sci-Fi-Server.
+**Keksi-HUD** ist ein vollständig anpassbares, modernes HUD-System für Garry's Mod Server. Es ersetzt die Standard-Spieler-Oberfläche durch eine immersive, taktische Sci-Fi-Benutzeroberfläche mit:
 
----
+- **Professionellem Design**: Abgewinkelte Panels, Scanner-Effekte und Glow-Animationen
+- **Vollständige Konfigurierbarkeit**: Alle Farben, Positionen und Animationen über Konfigurationsdateien anpassbar
+- **Performance-Optimiert**: Effiziente Lua-Implementierung für flüssige Darstellung
+- **Roleplay-Fokus**: Perfekt für Sci-Fi, Military und Tactical RP Server
 
-## ✨ Hauptfeatures
+## 🎯 Hauptfeatures
 
-- 🧭 **Futuristisches Design**  
-  Saubere Linien, abgewinkelte Panels und dynamische Scan-Effekte  
+### 🎨 **Visuelles Design**
+- **Lila-Blau Farbschema**: Futuristisches Color-Grading mit drei Varianten (Default, Assault, Support)
+- **Animierte Scanner-Balken**: Segmentierte Statusanzeigen mit Pulse-Effekten
+- **Box-Scan-Effekte**: Periodische Scan-Linien über alle UI-Elemente
+- **Abgewinkelte Panels**: Geometrische, taktische Optik mit Eckrahmen
+- **Glow-Effekte**: Mehrschichtige Leuchteffekte für bessere Sichtbarkeit
 
-- 🌊 **Bacta-Cyan Farbschema**  
-  Ein klares, pulsierendes Cyan/Türkis-Thema mit leuchtenden Akzenten  
+### 📊 **HUD-Komponenten**
+- **Vitalzeichen-Panel**: Health, Armor und Stamina mit Scanner-Balken
+- **Munitions-Display**: Waffen-spezifische Anzeige mit Warnsystem bei niedrigem Ammo
+- **Radar-System**: 360° Radar mit Spieler/NPC-Erkennung und Team-Farbcodierung
+- **Kompass**: Richtungsanzeige mit Grad-Anzeige und Orientierungsmarkierungen
+- **XP-Progression**: Level-System mit animierten Fortschrittsbalken
+- **Missionsziele**: Konfigurierbares Objektiv-Tracking-System
+- **Funkkanal-Status**: TX/RX Anzeige für Voice-Chat Integration
 
-- ⚙️ **Modularer Aufbau**  
-  Alle UI-Elemente sind über eine Konfigurationsdatei anpassbar  
+### 🎮 **Modi & Features**
+- **Nachtmodus**: Gedämpfte Farbpalette für bessere Sicht bei Dunkelheit
+- **Minimal-Modus**: Reduzierte UI für kompetitives Gaming
+- **Combat-Modus**: Fokus auf kampfbezogene Elemente (versteckt XP/Missionen)
+- **Farbenblind-Filter**: Unterstützung für Farbenblinde Spieler
+- **Konsolen-Befehle**: Live-Umschaltung aller Modi im Spiel
 
-- 🌓 **Verschiedene Modi**  
-  - Nachtmodus 🌙 (gedämpfte Farben)  
-  - Minimal-Modus 🧩 (reduzierte Anzeigen)  
-  - Combat-Mode 🔫 (fokussiert auf Kampfelemente)  
+##  Dateistruktur
 
-- 🎞️ **Animierte Elemente**  
-  Sanfte Übergänge, Puls- und Energieeffekte  
+`
+Keksi-HUD/
+ lua/
+    autorun/
+       scifi_hud_loader.lua          # Automatischer Addon-Loader
+    scifi_hud/
+        scifi_hud_config.lua         # Zentrale Konfigurationsdatei
+        cl_scifi_hud.lua             # Haupt-HUD Client-Code
+└ README.md                            # Diese Datei
+`
 
-- 🧠 **Umfassende Anzeigen**  
-  - Gesundheit & Rüstung mit Scanner-Balken  
-  - Munitionsstatus mit Warnsystem  
-  - Ausdauer-Anzeige  
-  - Radar mit Entitätserkennung  
-  - Kompass mit Richtungsanzeige  
-  - XP-System & Fortschritt  
-  - Missionsziele  
-  - Funkkanal-Status  
+###  Dateien-Beschreibung
 
----
+| Datei | Zweck | Beschreibung |
+|-------|-------|--------------|
+| scifi_hud_loader.lua | **Addon-Loader** | Lädt automatisch alle HUD-Komponenten beim Spielstart |
+| scifi_hud_config.lua | **Konfiguration** | Zentrale Einstellungen für Farben, Positionen, Animationen und Modi |
+| cl_scifi_hud.lua | **HUD-Engine** | Haupt-Client-Script mit allen Zeichnungs- und Animationsfunktionen |
 
-## 🚀 Installation
+##  Installation
 
-1. Lade die Dateien herunter und entpacke sie in:  
-   `garrysmod/addons/`
+1. **Download**: Lade das Repository als ZIP herunter oder clone es
+2. **Entpacken**: Entpacke den Keksi-HUD Ordner nach: garrysmod/addons/keksi-hud/
+3. **Server-Neustart**: Starte deinen Garry's Mod Server neu
+4. **Client-Verbindung**: Spieler laden das HUD automatisch beim Verbinden
 
-2. **Garry’s Mod starten** – Das HUD lädt automatisch beim Spielstart!  
+##  Konfiguration
 
----
+Alle Einstellungen sind in lua/scifi_hud/scifi_hud_config.lua zentral gespeichert.
 
-## ⚙️ Konfiguration
+##  Verwendung & Konsolenbefehle
 
-Alle Einstellungen befinden sich in der Datei:  
-`lua/scifi_hud/scifi_hud_config.lua`
+### In-Game Steuerung
+- scifi_hud_toggle night     # Nachtmodus an/aus
+- scifi_hud_toggle minimal   # Minimal-Modus an/aus  
+- scifi_hud_toggle combat    # Combat-Modus an/aus
 
-### Beispieleinstellungen:
+### HUD-Layout
+| Position | Element | Beschreibung |
+|----------|---------|--------------|
+| **Links unten** | Vitalzeichen | Health, Armor, Stamina mit Scanner-Balken |
+| **Rechts unten** | Munition | Waffen-Info mit Warnsystem und Reserve-Anzeige |
+| **Oben Mitte** | Kompass | 360° Navigation mit Grad-Anzeige |
+| **Oben links** | XP & Missionen | Level-Fortschritt und Objektiv-Tracking |
+| **Oben rechts** | Funkkanal | TX/RX Status für Voice-Chat |
+| **Rechts Mitte** | Radar | 360° Spieler/NPC-Erkennung mit Team-Farben |
 
-```lua
--- Farbschemata
-SciFiHUD.Colors = {
-    default = Color(0, 255, 255, 255),  -- Bacta-Cyan
-    assault = Color(255, 80, 80, 255),
-    support = Color(80, 255, 120, 255)
-}
+##  Entwicklung & Anpassung
 
--- Animationen
-SciFiHUD.Animations = {
-    fadeSpeed = 0.3,
-    pulseIntensity = 1.2,
-}
+Das HUD ist vollständig modular aufgebaut. Für eigene Anpassungen:
 
--- Scanner-Einstellungen
-SciFiHUD.Scanner = {
-    enabled = true,
-    radius = 300,
-    refreshRate = 0.5
-}
+1. **Farben ändern**: Bearbeite SCIFI_HUD_CONFIG.ColorSchemes
+2. **Positionen anpassen**: Modifiziere SCIFI_HUD_CONFIG.Positions
+3. **Neue Modi hinzufügen**: Erweitere die ConVar-Logik in cl_scifi_hud.lua
+4. **Animation-Timing**: Passe SCIFI_HUD_CONFIG.Animations an
 
--- Text
-SciFiHUD.Labels = {
-    health = "VITALS",
-    armor  = "SHIELD",
-    ammo   = "AMMO",
-}
-````
+### Kompatibilität
+- **Garry's Mod**: Version 13+
+- **DarkRP**: Vollständig kompatibel
+- **Custom Gamemodes**: Funktioniert mit allen Standard-GMod APIs
+- **Andere HUDs**: Deaktiviert automatisch Standard-HUD-Elemente
 
-### Konsolenbefehle
+##  Lizenz & Nutzungsrechte
 
-```bash
-scifi_hud_toggle night     # Nachtmodus an/aus
-scifi_hud_toggle minimal   # Minimal-Modus an/aus
-scifi_hud_toggle combat    # Combat-Mode an/aus
-```
+###  **Erlaubt:**
+- Kostenlose Nutzung auf privaten und öffentlichen Servern
+- Modifikation und Anpassung für eigene Zwecke
+- Weiterentwicklung und Verbesserung des Codes
+- Verwendung als Basis für eigene HUD-Projekte
 
----
+###  **Nicht erlaubt:**
+- **Kommerzieller Verkauf** oder kostenpflichtige Lizenzierung
+- **Urheberschaftsansprüche** ohne Nennung des ursprünglichen Autors
+- **Weiterverkauf** von modifizierten Versionen
 
-## 🎮 Verwendung
+###  **Rechtlicher Hinweis**
+Dieses Projekt steht unter einer **nicht-kommerziellen Gemeinschaftslizenz**. Der Code und das Design sind geistiges Eigentum von **Imperator Keksi**. Bei Verwendung in öffentlichen Projekten wird eine Quellennennung geschätzt, ist aber nicht zwingend erforderlich.
 
-Das SciFi HUD ersetzt automatisch die Standard-HUD-Elemente und zeigt:
+##  Entwickler
 
-| Position         | Anzeige                               |
-| ---------------- | ------------------------------------- |
-| **Links unten**  | Vitalzeichen (Health, Armor, Stamina) |
-| **Rechts unten** | Munition mit Warnsystem               |
-| **Oben Mitte**   | Kompass mit Richtungsanzeige          |
-| **Oben links**   | XP-Fortschritt & Missionsziele        |
-| **Oben rechts**  | Funkkanal-Status                      |
-| **Rechts**       | Radar mit Spieler/NPC-Erkennung       |
+**Imperator Keksi**  
+Vollzeit-Entwickler für Garry's Mod Addons mit Fokus auf immersive User Interfaces
 
----
+###  **Social Media & Kontakt**
+[![Website](https://img.shields.io/badge/_Website-guns.lol%2Fimperatorkeksi-red?style=flat-square)](https://guns.lol/imperatorkeksi)
 
-## 🛠️ Entwicklung
+###  **Spezialisierungen**
+- **HUD/UI Design**: Futuristische und taktische Benutzeroberflächen
+- **Lua-Programmierung**: Performance-optimierte Garry's Mod Skripte
+- **Game-Design**: Immersive Spielerlebnisse für RP-Server
 
-**Status:** 🟡 *Beta* — In aktiver Entwicklung
-Das HUD wird fortlaufend erweitert und optimiert. Ziel ist eine stabile, performante Version mit erweiterten Sci-Fi-Features.
+##  Support & Community
 
----
+###  **Bug Reports & Feature Requests**
+Erstelle ein **Issue** auf GitHub mit:
+- Detaillierter Beschreibung des Problems
+- Schritte zur Reproduktion
+- Screenshots (falls visueller Bug)
+- Console-Output (falls Lua-Fehler)
 
-## 🤝 Mitwirken
+###  **Feature-Wünsche**
+Ich bin immer offen für neue Ideen! Beschreibe deine Vorschläge so detailliert wie möglich.
 
-**Du darfst:**
-
-* ✅ Den Code für eigene Projekte verwenden
-* ✅ Verbesserungen vorschlagen
-* ✅ Den Code weiterentwickeln
-* ✅ Das HUD an eigene Bedürfnisse anpassen
-
-**Du darfst nicht:**
-
-* ❌ Den Code kommerziell verkaufen
-* ❌ Die Urheberschaft beanspruchen
-* ❌ Modifikationen ohne Hinweis vertreiben
-
----
-
-## 👨‍💻 Entwickler
-
-**Imperator Keksi**
-[![Guns.lol](https://img.shields.io/badge/Follow%20me-guns.lol%2Fimperatorkeksi-red)](https://guns.lol/imperatorkeksi)
-
-**Kontakt & Community:**
-[![Discord](https://img.shields.io/badge/Join-Discord-5865F2?logo=discord\&logoColor=white)](https://discord.gg/BTtC6b3XAY)
-
----
-
-## 📄 Lizenz
-
-Dieses Projekt steht unter einer **nicht-kommerziellen Gemeinschaftslizenz**:
-
-* 🆓 Freie Nutzung und Modifikation erlaubt
-* 🚫 Kommerzielle Nutzung und Weiterverkauf untersagt
-* 💬 Quellennennung wird geschätzt, ist aber nicht zwingend
-
-**Rechtlicher Hinweis:**
-Der Code und das Design sind geistiges Eigentum von *Imperator Keksi*.
-Bei Fragen zur kommerziellen Nutzung bitte direkt Kontakt aufnehmen.
+###  **Updates & News**
+Folge mir auf [guns.lol/imperatorkeksi](https://guns.lol/imperatorkeksi) für:
+- Neue Feature-Ankündigungen
+- Beta-Versionen
+- Andere Garry's Mod Projekte
 
 ---
 
-## 💬 Feedback & Support
-
-Feedback, Ideen oder Bugs?
-👉 Erstelle ein **Issue auf GitHub** oder tritt dem **Discord-Server** bei.
-
-**Support:**
-
-* 💬 Discord: [https://discord.gg/BTtC6b3XAY](https://discord.gg/BTtC6b3XAY)
-* 🌐 Updates & News: [https://guns.lol/imperatorkeksi](https://guns.lol/imperatorkeksi)
-
----
-
-**Made with 💙 by Imperator Keksi**
-*"Die Zukunft des Gameplay – Heute schon erleben!"* 🚀
+**Made with 💜 by Imperator Keksi**  
+*"Bringing the future of gaming interfaces to Garry's Mod - today!"*
