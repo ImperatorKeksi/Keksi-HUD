@@ -1,86 +1,156 @@
+--[[
+=====================================================================
+                  KEKSI-HUD HAUPT-CLIENT-SYSTEM
+=====================================================================
+  Autor: Imperator Keksi
+  Zweck: Vollständiges futuristisches HUD-System für Garry's Mod
+  
+  Diese Datei enthält:
+  - Alle Zeichnungs-Funktionen für UI-Elemente
+  - Scanner-Effekte und Animationen  
+  - HUD-Hook-Management
+  - Konsolen-Befehle für Live-Konfiguration
+  - Verschiedene Modi (Nacht, Minimal, Combat)
+  
+  Das HUD ersetzt Standard-GMod UI-Elemente durch ein futuristisches
+  Sci-Fi Interface mit animierten Scanner-Balken und Glow-Effekten.
+=====================================================================
+--]]
+
+-- =====================================================================
+-- SICHERHEITSPRÜFUNG & INITIALISIERUNG
+-- =====================================================================
+-- Stelle sicher, dass dieser Code nur auf dem Client ausgeführt wird
 if SERVER then return end
 
 print("[SciFi HUD] HUD wird geladen...")
 
--- ===== KONFIGURATION =====
--- Verwende die externe Config-Datei
+-- =====================================================================
+-- KONFIGURATIONSVALIDIERUNG
+-- =====================================================================
+-- Prüfe ob die externe Konfigurationsdatei korrekt geladen wurde
 if not SCIFI_HUD_CONFIG then
     print("[SciFi HUD] WARNUNG: Config nicht gefunden, verwende Standardwerte!")
-    -- Fallback Standardwerte hier einfügen falls needed
+    -- Notfall-Fallback könnte hier eingefügt werden, aber normalerweise 
+    -- sollte die Config-Datei immer vor dieser Datei geladen werden
 end
 
--- |> CONVARS FÜR HUD-EINSTELLUNGEN
-local hud_nightmode = CreateClientConVar("scifi_hud_nightmode", "0", true, false, "Nachtmodus aktivieren")
-local hud_colorblind = CreateClientConVar("scifi_hud_colorblind", "0", true, false, "Farbenblind-Filter")
-local hud_minimal = CreateClientConVar("scifi_hud_minimal", "0", true, false, "Minimales HUD")
-local hud_combatmode = CreateClientConVar("scifi_hud_combatmode", "0", true, false, "Combat-Mode")
+-- =====================================================================
+-- CONSOLE-VARIABLEN (CONVARS) FÜR HUD-EINSTELLUNGEN  
+-- =====================================================================
+-- Diese Variablen ermöglichen Live-Konfiguration im Spiel über die Konsole
+-- Format: CreateClientConVar(name, default_value, save_to_config, user_info, help_text)
 
--- |> FARBSCHEMA AUS CONFIG VERWENDEN
+local hud_nightmode = CreateClientConVar("scifi_hud_nightmode", "0", true, false, "Nachtmodus aktivieren - Reduziert Helligkeit für bessere Nachtsicht")
+local hud_colorblind = CreateClientConVar("scifi_hud_colorblind", "0", true, false, "Farbenblind-Filter aktivieren - Alternativfarben für bessere Erkennbarkeit")
+local hud_minimal = CreateClientConVar("scifi_hud_minimal", "0", true, false, "Minimales HUD aktivieren - Versteckt nicht-essentielle Elemente")
+local hud_combatmode = CreateClientConVar("scifi_hud_combatmode", "0", true, false, "Combat-Mode aktivieren - Fokus auf kampfkritische Informationen")
+
+-- =====================================================================
+-- FARBSCHEMA-REFERENZ LADEN
+-- =====================================================================
+-- Lade die Farbschemata aus der Config-Datei für einfacheren Zugriff
 local colorSchemes = SCIFI_HUD_CONFIG.ColorSchemes
 
--- ===== GRAFISCHE ELEMENTE =====
+-- =====================================================================
+-- GRUNDLEGENDE ZEICHNUNGS-FUNKTIONEN
+-- =====================================================================
+-- Diese Funktionen erstellen die grundlegenden visuellen Elemente
 
--- |> RAHMEN UND PANELS (bleibt gleich)
+-- ---------------------------------------------------------------------
+-- ECKRAHMEN ZEICHNEN
+-- ---------------------------------------------------------------------
+-- Zeichnet taktische Eckrahmen um UI-Elemente (Sci-Fi Look)
+-- Parameter: x, y (Position), w, h (Größe), col (Farbe), cornerSize (Eckgröße)
 local function DrawCornerFrame(x, y, w, h, col, cornerSize)
-    cornerSize = cornerSize or 12
+    cornerSize = cornerSize or 12  -- Standard-Eckgröße falls nicht angegeben
     surface.SetDrawColor(col)
     
-    surface.DrawLine(x, y, x + cornerSize, y)
-    surface.DrawLine(x, y, x, y + cornerSize)
-    surface.DrawLine(x + w - cornerSize, y, x + w, y)
-    surface.DrawLine(x + w, y, x + w, y + cornerSize)
-    surface.DrawLine(x, y + h - cornerSize, x, y + h)
-    surface.DrawLine(x, y + h, x + cornerSize, y + h)
-    surface.DrawLine(x + w, y + h - cornerSize, x + w, y + h)
-    surface.DrawLine(x + w - cornerSize, y + h, x + w, y + h)
+    -- Obere Ecken zeichnen
+    surface.DrawLine(x, y, x + cornerSize, y)                    -- Oben links horizontal
+    surface.DrawLine(x, y, x, y + cornerSize)                    -- Oben links vertikal
+    surface.DrawLine(x + w - cornerSize, y, x + w, y)            -- Oben rechts horizontal
+    surface.DrawLine(x + w, y, x + w, y + cornerSize)            -- Oben rechts vertikal
+    
+    -- Untere Ecken zeichnen
+    surface.DrawLine(x, y + h - cornerSize, x, y + h)            -- Unten links vertikal
+    surface.DrawLine(x, y + h, x + cornerSize, y + h)            -- Unten links horizontal
+    surface.DrawLine(x + w, y + h - cornerSize, x + w, y + h)    -- Unten rechts vertikal
+    surface.DrawLine(x + w - cornerSize, y + h, x + w, y + h)    -- Unten rechts horizontal
 end
 
+-- ---------------------------------------------------------------------
+-- ABGEWINKELTE PANELS ZEICHNEN
+-- ---------------------------------------------------------------------
+-- Zeichnet futuristische Panels mit abgeschnittenen Ecken
+-- Parameter: x, y (Position), w, h (Größe), bgCol (Hintergrund), borderCol (Rand), cutSize (Schnittgröße)
 local function DrawAngledPanel(x, y, w, h, bgCol, borderCol, cutSize)
-    cutSize = cutSize or 8
+    cutSize = cutSize or 8  -- Standard-Schnittgröße
     
+    -- Polygon für abgewinkelte Form erstellen (8 Punkte für oktagonale Form)
     local poly = {
-        {x = x + cutSize, y = y},
-        {x = x + w - cutSize, y = y},
-        {x = x + w, y = y + cutSize},
-        {x = x + w, y = y + h - cutSize},
-        {x = x + w - cutSize, y = y + h},
-        {x = x + cutSize, y = y + h},
-        {x = x, y = y + h - cutSize},
-        {x = x, y = y + cutSize}
+        {x = x + cutSize, y = y},                    -- Oben links (nach Schnitt)
+        {x = x + w - cutSize, y = y},                -- Oben rechts (vor Schnitt)
+        {x = x + w, y = y + cutSize},                -- Rechts oben (nach Schnitt)
+        {x = x + w, y = y + h - cutSize},            -- Rechts unten (vor Schnitt)
+        {x = x + w - cutSize, y = y + h},            -- Unten rechts (vor Schnitt)
+        {x = x + cutSize, y = y + h},                -- Unten links (nach Schnitt)
+        {x = x, y = y + h - cutSize},                -- Links unten (vor Schnitt)
+        {x = x, y = y + cutSize}                     -- Links oben (nach Schnitt)
     }
     
+    -- Hintergrund-Polygon zeichnen
     draw.NoTexture()
     surface.SetDrawColor(bgCol)
     surface.DrawPoly(poly)
     
+    -- Umrandung des Polygons zeichnen
     surface.SetDrawColor(borderCol)
     for i = 1, #poly do
-        local next = i % #poly + 1
+        local next = i % #poly + 1  -- Nächster Punkt (mit Wrap-around)
         surface.DrawLine(poly[i].x, poly[i].y, poly[next].x, poly[next].y)
     end
 end
 
--- |> SCAN-BALKEN MIT SANFTEN ÜBERGÄNGEN - CONFIG WERTE VERWENDEN
-local scanProgress = 0
-local lastScanTime = 0
+-- =====================================================================
+-- SCANNER-BALKEN SYSTEM
+-- =====================================================================
+-- Erweiterte Statusbalken mit segmentierter Darstellung und Pulse-Effekten
 
+-- Globale Variablen für Scanner-Animationen
+local scanProgress = 0      -- Fortschritt des aktuellen Scans
+local lastScanTime = 0      -- Zeitpunkt des letzten Scans
+
+-- ---------------------------------------------------------------------
+-- ANIMIERTE SCANNER-BALKEN ZEICHNEN
+-- ---------------------------------------------------------------------
+-- Zeichnet segmentierte Statusbalken mit Glow- und Pulse-Effekten
+-- Parameter: x, y (Position), w, h (Größe), percent (Füllstand 0-1), 
+--           bgCol (Hintergrund), fillCol (Füllfarbe), segments (Anzahl Segmente)
 local function DrawScannerBar(x, y, w, h, percent, bgCol, fillCol, segments)
+    -- Anzahl Segmente aus Config laden oder Standard verwenden
     segments = segments or SCIFI_HUD_CONFIG.Scanner.barScanner.segmentCount
-    -- KORREKTUR: Segmentbreite anpassen damit sie nicht über den Rahmen ragen
-    local segmentWidth = (w - 8 - (segments - 1) * 2) / segments  -- -8 Pixel für seitlichen Abstand
     
-    -- Hintergrund Panel
+    -- Segmentbreite berechnen (mit Abständen und Padding)
+    -- -8 Pixel für seitlichen Abstand, -(segments-1)*2 für Zwischenräume
+    local segmentWidth = (w - 8 - (segments - 1) * 2) / segments
+    
+    -- Hintergrund-Panel mit abgewinkelter Form zeichnen
     DrawAngledPanel(x, y, w, h, bgCol, Color(fillCol.r, fillCol.g, fillCol.b, 80), 4)
     
-    -- Gefüllte Segmente mit sanften Übergängen
-    local animatedPercent = percent
-    local fillSegments = math.floor(segments * animatedPercent)
+    -- Berechnung der gefüllten Segmente
+    local animatedPercent = percent  -- Könnte später für sanfte Animationen erweitert werden
+    local fillSegments = math.floor(segments * animatedPercent)  -- Vollständig gefüllte Segmente
     
+    -- Vollständig gefüllte Segmente zeichnen
     for i = 0, fillSegments - 1 do
-        local segX = x + 4 + i * (segmentWidth + 2)  -- +4 Pixel Abstand vom linken Rand
+        local segX = x + 4 + i * (segmentWidth + 2)  -- Position des Segments (mit 4px Padding)
         
-        -- Sanfte Glow-Animation für aktive Segmente
+        -- Pulse-Animation für lebendigen Effekt
+        -- Jedes Segment pulsiert mit leichtem Zeitversatz (i * 0.5)
         local pulse = math.sin(CurTime() * SCIFI_HUD_CONFIG.Scanner.barScanner.pulseSpeed + i * 0.5) * 0.3 + 0.7
+        
+        -- Segmentfarbe mit Pulse-Effekt
         local segmentCol = Color(
             fillCol.r * pulse, 
             fillCol.g * pulse, 
@@ -88,72 +158,96 @@ local function DrawScannerBar(x, y, w, h, percent, bgCol, fillCol, segments)
             fillCol.a
         )
         
-        -- KORREKTUR: Segmente innerhalb des Rahmens zeichnen
+        -- Hauptsegment zeichnen (innerhalb der Panel-Grenzen)
         draw.RoundedBox(0, segX, y + 3, segmentWidth, h - 6, segmentCol)
         
-        -- Subtiler Glow-Effekt
+        -- Subtiler Glow-Effekt um das Segment
         local glowCol = Color(fillCol.r, fillCol.g, fillCol.b, 30 * pulse)
         draw.RoundedBox(0, segX - 1, y + 2, segmentWidth + 2, h - 4, glowCol)
     end
     
-    -- Partielles Segment mit sanftem Übergang
+    -- Partiell gefülltes Segment (für sanfte Übergänge)
     local partialPercent = (segments * animatedPercent) - fillSegments
+    -- Partielles Segment zeichnen (wenn vorhanden)
     if partialPercent > 0 and fillSegments < segments then
-        local segX = x + 4 + fillSegments * (segmentWidth + 2)
-        local partialWidth = segmentWidth * partialPercent
+        local segX = x + 4 + fillSegments * (segmentWidth + 2)  -- Position des partiellen Segments
+        local partialWidth = segmentWidth * partialPercent       -- Breite basierend auf Prozentsatz
         
-        -- Sanfte Füll-Animation
+        -- Füll-Animation für das sich füllende Segment
         local fillAnim = math.sin(CurTime() * SCIFI_HUD_CONFIG.Scanner.barScanner.partialAnimSpeed) * 0.2 + 0.8
+        
+        -- Partielles Segment zeichnen
         draw.RoundedBox(0, segX, y + 3, partialWidth, h - 6, fillCol)
         
-        -- Pulsierender Glow für füllendes Segment
+        -- Intensiver Glow-Effekt für das aktive (sich füllende) Segment
         local pulseGlow = Color(fillCol.r, fillCol.g, fillCol.b, 80 * fillAnim)
         draw.RoundedBox(0, segX - 1, y + 2, partialWidth + 2, h - 4, pulseGlow)
     end
     
+    -- Rückgabe des animierten Prozentsatzes (für weitere Verwendung)
     return animatedPercent
 end
 
--- |> BOX SCAN EFFEKT - CONFIG WERTE VERWENDEN
+-- =====================================================================
+-- BOX-SCAN EFFEKT SYSTEM
+-- =====================================================================
+-- Periodische Scanner-Linien die über UI-Boxen laufen (wie in Sci-Fi Filmen)
+
+-- Globale Tabelle für Scan-Daten jeder Box (jede Box hat eigenen Scan-Zustand)
 local boxScanData = {}
 
+-- ---------------------------------------------------------------------
+-- BOX-SCAN EFFEKT ZEICHNEN
+-- ---------------------------------------------------------------------
+-- Erzeugt periodische Scan-Linien die über UI-Elemente laufen
+-- Parameter: x, y (Position), w, h (Größe), scanCol (Scan-Farbe), scanType (reserviert für zukünftige Typen)
 local function DrawBoxScanEffect(x, y, w, h, scanCol, scanType)
+    -- Eindeutiger Schlüssel für diese Box basierend auf Position
     local boxKey = x .. "_" .. y
+    
+    -- Initialisiere Scan-Daten für neue Boxen
     if not boxScanData[boxKey] then
         boxScanData[boxKey] = {
-            progress = 0,
-            lastScan = 0,
-            direction = SCIFI_HUD_CONFIG.Scanner.boxScan.direction,
-            speed = math.Rand(SCIFI_HUD_CONFIG.Scanner.boxScan.minSpeed, SCIFI_HUD_CONFIG.Scanner.boxScan.maxSpeed)
+            progress = 0,     -- Aktueller Scan-Fortschritt (0 = oben, 1 = unten)
+            lastScan = 0,     -- Zeitpunkt des letzten Scan-Starts
+            direction = SCIFI_HUD_CONFIG.Scanner.boxScan.direction,  -- Scan-Richtung aus Config
+            speed = math.Rand(SCIFI_HUD_CONFIG.Scanner.boxScan.minSpeed, SCIFI_HUD_CONFIG.Scanner.boxScan.maxSpeed)  -- Zufällige Geschwindigkeit
         }
     end
     
     local data = boxScanData[boxKey]
     local currentTime = CurTime()
     
-    -- Starte neuen Scan mit Config-Intervallen
+    -- Neuen Scan starten wenn genügend Zeit vergangen ist
+    -- Intervall wird zufällig zwischen min und max aus der Config gewählt
     if currentTime - data.lastScan > math.Rand(SCIFI_HUD_CONFIG.Scanner.boxScan.minInterval, SCIFI_HUD_CONFIG.Scanner.boxScan.maxInterval) then
-        data.progress = 0
-        data.lastScan = currentTime
-        data.direction = SCIFI_HUD_CONFIG.Scanner.boxScan.direction
+        data.progress = 0        -- Scan-Fortschritt zurücksetzen
+        data.lastScan = currentTime  -- Neuen Startzeitpunkt merken
+        data.direction = SCIFI_HUD_CONFIG.Scanner.boxScan.direction  -- Richtung aus Config neu laden
+        -- Neue zufällige Geschwindigkeit für Variation
         data.speed = math.Rand(SCIFI_HUD_CONFIG.Scanner.boxScan.minSpeed, SCIFI_HUD_CONFIG.Scanner.boxScan.maxSpeed)
     end
     
-    -- Update Scan-Fortschritt mit Config-Geschwindigkeit
+    -- Scan-Fortschritt sanft animieren mit konfigurierbarer Geschwindigkeit
     data.progress = Lerp(FrameTime() * data.speed, data.progress, 1.2)
     
+    -- Scan-Linie nur zeichnen wenn sie aktiv ist (zwischen Start und Ende)
     if data.progress > 0 and data.progress < 1.1 then
+        -- Alpha-Wert für Fade-In/Fade-Out Effekt (stärker in der Mitte)
         local scanAlpha = 80 * (1 - math.abs(data.progress - 0.5) * 2)
         
-        -- NUR OBEN->UNTEN SCAN (RICHTUNG 3)
+        -- Scan-Position berechnen (aktuell nur oben nach unten)
         local scanY = y + h * data.progress
+        
+        -- Haupt-Scan-Linie zeichnen
         surface.SetDrawColor(scanCol.r, scanCol.g, scanCol.b, scanAlpha)
         surface.DrawRect(x, scanY - 2, w, SCIFI_HUD_CONFIG.Scanner.boxScan.scanWidth)
         
-        -- Glow Effekt mit Config-Layern
+        -- Mehrstufiger Glow-Effekt um die Scan-Linie
         for i = 1, SCIFI_HUD_CONFIG.Scanner.boxScan.glowLayers do
-            local glowAlpha = scanAlpha * (0.6 - i * 0.2)
+            local glowAlpha = scanAlpha * (0.6 - i * 0.2)  -- Jede Schicht wird schwächer
             surface.SetDrawColor(scanCol.r, scanCol.g, scanCol.b, glowAlpha)
+            -- Glow-Schichten werden progressiv breiter und höher
             surface.DrawRect(x, scanY - 2 - i, w, SCIFI_HUD_CONFIG.Scanner.boxScan.scanWidth + i * 2)
         end
     end
@@ -301,56 +395,90 @@ local function DrawCompass(x, y, w, h, col, ply)
     draw.SimpleText(math.floor(ang) .. "°", "DermaDefault", centerX, compassY + 5, col, TEXT_ALIGN_CENTER)
 end
 
--- ===== SYSTEM FUNKTIONEN =====
+-- =====================================================================
+-- SYSTEM-FUNKTIONEN & DATEN-MANAGEMENT
+-- =====================================================================
+-- Verwaltung von Spielerdaten und sanften Animationen
 
-local lastHealth = 100
-local lastArmor = 0
-local lastStamina = SCIFI_HUD_CONFIG.Stamina and SCIFI_HUD_CONFIG.Stamina.max or 100
+-- ---------------------------------------------------------------------
+-- LETZTE BEKANNTE SPIELER-WERTE (für Veränderungserkennung)
+-- ---------------------------------------------------------------------
+local lastHealth = 100     -- Letzter Gesundheitswert
+local lastArmor = 0        -- Letzter Rüstungswert  
+local lastStamina = SCIFI_HUD_CONFIG.Stamina and SCIFI_HUD_CONFIG.Stamina.max or 100  -- Letzter Ausdauerwert
 
--- Client feedback state
-local staminaEmptyState = false
-local staminaPulseTimer = 0
+-- ---------------------------------------------------------------------
+-- AUSDAUER-SYSTEM ZUSTANDSVERWALTUNG
+-- ---------------------------------------------------------------------
+-- Status-Tracking für Ausdauer-Feedback
+local staminaEmptyState = false    -- Ist Ausdauer derzeit leer?
+local staminaPulseTimer = 0        -- Timer für Pulse-Effekte bei leerer Ausdauer
 
--- Sound files: use built-in GMod sounds
-local soundEmpty = "buttons/button10.wav"
-local soundRefill = "buttons/button15.wav"
+-- ---------------------------------------------------------------------
+-- SOUND-SYSTEM FÜR FEEDBACK
+-- ---------------------------------------------------------------------
+-- Verwende Garry's Mod Standard-Sounds für Audio-Feedback
+local soundEmpty = "buttons/button10.wav"   -- Sound für "Ausdauer leer"
+local soundRefill = "buttons/button15.wav"  -- Sound für "Ausdauer wieder verfügbar"
 
--- Receive server stamina updates
+-- ---------------------------------------------------------------------
+-- NETZWERK-EMPFÄNGER FÜR AUSDAUER-UPDATES
+-- ---------------------------------------------------------------------
+-- Empfängt Ausdauer-Updates vom Server (falls Server-seitige Ausdauer implementiert ist)
 net.Receive("SciFiHUD_StaminaUpdate", function()
-    local val = net.ReadFloat()
+    local val = net.ReadFloat()  -- Ausdauerwert vom Server empfangen
     if val then
-        print("[SciFiHUD] Stamina net recv: ", val)  -- Debug print aktiviert
-        -- detect transitions
+        print("[SciFiHUD] Stamina net recv: ", val)  -- Debug-Ausgabe (für Entwicklung)
+        
+        -- Übergang zu "leer" erkennen und entsprechend reagieren
         if val <= 0 and not staminaEmptyState then
-            staminaEmptyState = true
-            staminaPulseTimer = CurTime() + 2.0 -- pulse for 2 seconds
-            surface.PlaySound(soundEmpty)
+            staminaEmptyState = true               -- Status auf "leer" setzen
+            staminaPulseTimer = CurTime() + 2.0   -- Pulse-Effekt für 2 Sekunden aktivieren
+            surface.PlaySound(soundEmpty)         -- "Leer"-Sound abspielen
+        -- Übergang zu "verfügbar" erkennen und entsprechend reagieren  
         elseif val > 10 and staminaEmptyState then
-            staminaEmptyState = false
-            surface.PlaySound(soundRefill)
+            staminaEmptyState = false             -- Status auf "verfügbar" setzen
+            surface.PlaySound(soundRefill)        -- "Wiederaufgefüllt"-Sound abspielen
         end
-        lastStamina = val
+        lastStamina = val  -- Neuen Wert speichern
     end
 end)
 
--- Sanfte Wert-Übergänge MIT CONFIG GESCHWINDIGKEITEN
-local smoothHealth = 100
-local smoothArmor = 0
-local smoothAmmo = 0
-local smoothAmmoReserve = 0
+-- ---------------------------------------------------------------------
+-- ANIMIERTE WERT-ÜBERGÄNGE
+-- ---------------------------------------------------------------------
+-- Aktuelle visuell angezeigte Werte (werden sanft zu den echten Werten animiert)
+local smoothHealth = 100        -- Animierter Gesundheitswert
+local smoothArmor = 0          -- Animierter Rüstungswert
+local smoothAmmo = 0           -- Animierte Munitionsanzeige
+local smoothAmmoReserve = 0    -- Animierte Reserve-Munitionsanzeige
 
+-- ---------------------------------------------------------------------
+-- SANFTE WERT-ANIMATIONS-FUNKTION
+-- ---------------------------------------------------------------------
+-- Interpoliert sanft zwischen aktuellen und Zielwerten
+-- Parameter: current (aktueller visueller Wert), target (Zielwert), speed (Animationsgeschwindigkeit)
+-- Rückgabe: Neuer interpolierter Wert
 local function SmoothValue(current, target, speed)
     return Lerp(FrameTime() * speed, current, target)
 end
 
+-- =====================================================================
+-- STANDARD-HUD DEAKTIVIERUNG
+-- =====================================================================
+-- Versteckt die Standard Garry's Mod HUD-Elemente damit unser Custom-HUD sie ersetzen kann
+
 hook.Add("HUDShouldDraw", "SciFiHUD_HideDefault", function(name)
+    -- Liste der zu versteckenden Standard-HUD-Elemente
     local hide = {
-        ["CHudHealth"] = true,
-        ["CHudBattery"] = true,
-        ["CHudAmmo"] = true,
-        ["CHudSecondaryAmmo"] = true,
-        ["CHudDeathNotice"] = true
+        ["CHudHealth"] = true,        -- Standard-Gesundheitsanzeige
+        ["CHudBattery"] = true,       -- Standard-Anzug-Energie/Rüstung  
+        ["CHudAmmo"] = true,          -- Standard-Munitionsanzeige
+        ["CHudSecondaryAmmo"] = true, -- Standard-Sekundär-Munitionsanzeige
+        ["CHudDeathNotice"] = true    -- Standard-Kill-Feed (optional, kann auch angezeigt werden)
     }
+    
+    -- Rückgabe: false = Element verstecken, true = Element anzeigen
     return not hide[name]
 end)
 
@@ -653,22 +781,42 @@ hook.Add("HUDPaint", "SciFiHUD_Paint", function()
     end
 end)
 
--- ===== KONSOLE BEFEHLE =====
+-- =====================================================================
+-- KONSOLEN-BEFEHLE FÜR LIVE-KONFIGURATION
+-- =====================================================================
+-- Ermöglicht es Spielern, HUD-Modi direkt im Spiel umzuschalten
 
+-- ---------------------------------------------------------------------
+-- HAUPT-TOGGLE-BEFEHL
+-- ---------------------------------------------------------------------
+-- Befehl: scifi_hud_toggle [night|minimal|combat]
+-- Schaltet verschiedene HUD-Modi um und zeigt Status im Chat an
 concommand.Add("scifi_hud_toggle", function(ply, cmd, args)
-    local scheme = colorSchemes.default
+    local scheme = colorSchemes.default  -- Farbschema für Chat-Nachrichten
+    
+    -- Prüfe welcher Modus umgeschaltet werden soll
     if args[1] == "night" then
+        -- Nachtmodus umschalten (reduzierte Helligkeit)
         RunConsoleCommand("scifi_hud_nightmode", hud_nightmode:GetBool() and "0" or "1")
         chat.AddText(scheme.primary, "[HUD] ", scheme.health_text, "Nachtmodus " .. (hud_nightmode:GetBool() and "aktiviert" or "deaktiviert"))
+        
     elseif args[1] == "minimal" then
+        -- Minimal-Modus umschalten (weniger UI-Elemente)
         RunConsoleCommand("scifi_hud_minimal", hud_minimal:GetBool() and "0" or "1")
         chat.AddText(scheme.primary, "[HUD] ", scheme.health_text, "Minimal-Modus " .. (hud_minimal:GetBool() and "aktiviert" or "deaktiviert"))
+        
     elseif args[1] == "combat" then
+        -- Combat-Modus umschalten (nur kampfkritische Elemente)
         RunConsoleCommand("scifi_hud_combatmode", hud_combatmode:GetBool() and "0" or "1")
         chat.AddText(scheme.primary, "[HUD] ", scheme.health_text, "Combat-Mode " .. (hud_combatmode:GetBool() and "aktiviert" or "deaktiviert"))
+        
     else
+        -- Hilfetext anzeigen wenn kein gültiger Parameter angegeben wurde
         chat.AddText(scheme.danger, "[HUD] ", scheme.health_text, "Verwendung: scifi_hud_toggle [night|minimal|combat]")
     end
 end)
 
-print("[SciFi HUD] Bacta-Cyan HUD erfolgreich geladen!")
+-- =====================================================================
+-- ERFOLGREICH GELADEN
+-- =====================================================================
+print("[SciFi HUD] Lila-Blau HUD erfolgreich geladen!")
