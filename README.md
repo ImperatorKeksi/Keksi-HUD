@@ -2,9 +2,9 @@
 
 > **Ein hochmodernes Sci-Fi HUD-System für Garry's Mod mit dynamischen Scanner-Effekten und immersivem Star Wars Theming**
 
-[![Version](https://img.shields.io/badge/Version-1.0-purple)](https://github.com/imperatorkeksi/keksi-hud)
+[![Version](https://img.shields.io/badge/Version-1.0--dev-orange)](https://github.com/imperatorkeksi/keksi-hud)
+[![Status](https://img.shields.io/badge/Status-In%20Development-yellow)](https://github.com/imperatorkeksi/keksi-hud)
 [![Garry's Mod](https://img.shields.io/badge/Garry's%20Mod-Compatible-blue)](https://store.steampowered.com/app/4000/Garrys_Mod/)
-[![DarkRP](https://img.shields.io/badge/DarkRP-Integration-orange)](https://github.com/FPtje/DarkRP)
 [![License](https://img.shields.io/badge/License-Free-green)](#lizenz)
 
 ---
@@ -25,15 +25,15 @@
 
 ## 🚀 Über das Projekt
 
-**Keksi-HUD - Futuristische Sci-Fi Edition** ist ein vollständig eigenentwickeltes HUD-System, das die Standard-Benutzeroberfläche von Garry's Mod durch eine immersive, futuristische Alternative ersetzt. Das Add-on wurde speziell für Roleplay-Server entwickelt und bietet eine taktische, sci-fi-inspirierte Optik mit dynamischen Animationen und Scanner-Effekten.
+**Keksi-HUD - Futuristische Sci-Fi Edition** ist ein vollständig eigenentwickeltes HUD-System, das die Standard-Benutzeroberfläche von Garry's Mod durch eine immersive, futuristische Alternative ersetzt. Das Add-on befindet sich derzeit in **aktiver Entwicklung** und wird kontinuierlich mit neuen Features und Verbesserungen erweitert.
 
-Mit seinem eleganten Lila-Blau Design und Star Wars-Theming ist es perfekt für **Military RP**, **Star Wars RP** und andere futuristische Rollenspiel-Szenarien geeignet. Dabei steht die Benutzerfreundlichkeit und Performance im Vordergrund.
+Obwohl als Version 1.0 bezeichnet, ist dieses Projekt ein **Work-in-Progress** mit regelmäßigen Updates, Bugfixes und Feature-Erweiterungen. Es wurde speziell für Roleplay-Server entwickelt und bietet eine taktische, sci-fi-inspirierte Optik mit dynamischen Animationen und Scanner-Effekten.
 
 ### 🎮 Hauptziele:
 - **Immersive Sci-Fi Erfahrung**: Futuristische UI-Elemente mit authentischem Star Wars Feeling
+- **Kontinuierliche Verbesserung**: Regelmäßige Updates basierend auf Community-Feedback
 - **Performance-Optimierung**: Effiziente Client-seitige Implementierung ohne Server-Belastung
-- **Vollständige Anpassbarkeit**: Modularer Aufbau für individuelle Konfiguration
-- **Einfache Integration**: Funktioniert out-of-the-box mit allen Garry's Mod Gamemodes
+- **Community-driven Development**: Offene Entwicklung mit Input von Servern und Spielern
 
 ---
 
@@ -116,6 +116,8 @@ Keksi-HUD/
 
 ### 📥 Installation
 
+> ⚠️ **Entwicklungshinweis**: Da sich das HUD in aktiver Entwicklung befindet, können sich Features und Konfigurationen zwischen Updates ändern. Regelmäßige Updates werden empfohlen!
+
 1. **Download** das Repository als ZIP-Datei oder clone es direkt:
    ```bash
    git clone https://github.com/imperatorkeksi/keksi-hud.git
@@ -129,6 +131,14 @@ Keksi-HUD/
 3. **Server-Neustart** oder `changelevel` ausführen
 
 4. **Automatische Aktivierung** - Das HUD lädt automatisch für alle Spieler
+
+### 🔄 Updates installieren
+```bash
+# Für Git-User: Repository aktualisieren
+git pull origin main
+
+# Für ZIP-Downloads: Alte Version löschen und neue herunterladen
+```
 
 ### 🕹️ HUD-Layout im Spiel
 
@@ -309,12 +319,14 @@ SCIFI_HUD_CONFIG.Performance = {
 - **💡 Motivation**: Stetige Weiterentwicklung und Lernen neuer Techniken
 
 ### 🔄 Entwicklungsreise:
-Imperator Keksi befindet sich noch am **Anfang seiner Addon-Entwicklungsreise**, macht aber **beeindruckende Fortschritte** und lernt kontinuierlich dazu. Seine Projekte zeigen bereits eine **hohe Qualität** und **Liebe zum Detail** - das Keksi-HUD ist ein perfektes Beispiel für sein wachsendes Können.
+Imperator Keksi befindet sich noch am **Anfang seiner Addon-Entwicklungsreise**, macht aber **beeindruckende Fortschritte** und lernt kontinuierlich dazu. Das Keksi-HUD ist ein **aktives Lernprojekt**, das ständig weiterentwickelt wird - jedes Update bringt neue Features, Verbesserungen und Bugfixes.
+
+Seine Projekte zeigen bereits eine **hohe Qualität** und **Liebe zum Detail**, auch wenn sie sich noch in der Entwicklungsphase befinden. Die **Version 1.0** ist der erste Meilenstein, aber keineswegs das Ende - es ist der Beginn einer kontinuierlichen Verbesserungsreise.
 
 ### 💬 Feedback willkommen:
-Er freut sich über **jede Art von Feedback**, Verbesserungsvorschläge oder neue Ideen. Die Community kann ihn jederzeit kontaktieren - er ist **immer bereit zu helfen** und **neue Konzepte zu diskutieren**.
+Da das HUD noch in Entwicklung ist, freut er sich **besonders über Feedback**, Bug-Reports und Verbesserungsvorschläge. Die Community kann aktiv zur Entwicklung beitragen - er ist **immer bereit zu helfen** und **neue Konzepte zu diskutieren**.
 
-> *"Gemeinsam können wir die besten Add-ons für die Garry's Mod Community erschaffen!"*
+> *"Gemeinsam können wir die besten Add-ons für die Garry's Mod Community erschaffen - Schritt für Schritt!"*
 
 ---
 
@@ -329,9 +341,10 @@ Er freut sich über **jede Art von Feedback**, Verbesserungsvorschläge oder neu
 Für **Fragen**, **Feedback** oder **Kollaborationen** kannst du Imperator Keksi über seine offiziellen Kanäle erreichen. Er ist immer interessiert an:
 
 - 💡 **Neuen Ideen** für HUD-Features und Verbesserungen
-- 🐛 **Bug Reports** und Verbesserungsvorschläge für bessere Performance
+- 🐛 **Bug Reports** und Verbesserungsvorschläge für bessere Performance  
 - 🤝 **Community Feedback** und Erfahrungen von Server-Ownern
 - 🚀 **Kollaborationsmöglichkeiten** mit anderen Addon-Entwicklern
+- ⚠️ **Entwicklungs-Updates** - Folge dem Projekt für die neuesten Verbesserungen
 
 ---
 
@@ -378,16 +391,18 @@ Wenn dir das **Keksi-HUD - Futuristische Sci-Fi Edition** gefällt, unterstütze
 - 💡 **Feature-Vorschläge** für zukünftige Versionen und Erweiterungen
 - 🤝 **Weiterempfehlungen** an andere Server-Owner und Roleplay-Communities
 
-### 🚀 **Zukunftspläne:**
-- 🔄 **Regelmäßige Updates** mit neuen Features basierend auf Community-Feedback
-- 🎨 **Zusätzliche Themes** und Design-Varianten für verschiedene RP-Settings  
-- 🔧 **Erweiterte Konfigurationsmöglichkeiten** für noch mehr Anpassbarkeit
-- 🌐 **Multi-Language Support** für internationale Server-Communities
-- 📱 **Responsive Design** für verschiedene Bildschirmauflösungen
+### 🚀 **Aktuelle Entwicklungsphase:**
+- 🔄 **Kontinuierliche Updates** mit neuen Features basierend auf Community-Feedback
+- 🎨 **Design-Verbesserungen** und zusätzliche Themes für verschiedene RP-Settings  
+- 🔧 **Code-Optimierung** für noch bessere Performance und Stabilität
+- 🌐 **Feature-Erweiterungen** für internationale Server-Communities
+- 📱 **UI-Verbesserungen** für verschiedene Bildschirmauflösungen
+
+> 💡 **Tipp**: Da sich das HUD in aktiver Entwicklung befindet, sollten Server-Owner regelmäßig Updates installieren, um von den neuesten Verbesserungen und Bugfixes zu profitieren!
 
 ---
 
-**Version 1.0** – Erstellt mit **💜 Leidenschaft** für die **Garry's Mod Community**
+**Version 1.0-dev** – Ein **Work-in-Progress** erstellt mit **💜 Leidenschaft** für die **Garry's Mod Community**
 
 *Ein Projekt von **Imperator Keksi** - Für die Gemeinschaft, mit der Gemeinschaft*
 
